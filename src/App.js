@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { View, ImagePickerIOS, Image } from 'react-native';
 
 import { watsonKey, watson_API_url} from './config/watsonAPI';
-import request from 'react-native-request';
 import RNFS from 'react-native-fs';
 import axios from 'axios';
-import RNFetchBlob from 'react-native-fetch-blob';
 
 export default class App extends Component {
   constructor(){
