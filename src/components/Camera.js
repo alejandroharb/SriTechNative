@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { View, ImagePickerIOS, Image, Text } from 'react-native';
+import { View, Image, Text, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
-import { watsonKey, watson_API_url} from '../config/watsonAPI';
-import RNFS from 'react-native-fs';
-import axios from 'axios';
+import { imageTaken } from '../actions/CameraActions';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 class CameraComponent extends Component {
   constructor(){
@@ -11,32 +15,15 @@ class CameraComponent extends Component {
     this.state = { image: null }
   }
 
-  componentDidMount(){
-    // this.pickImage();
-  }
-
-  pickImage(){
-    //openSelectDialog(config, successCallBack, errorCallBack);
-    ImagePickerIOS.openSelectDialog({}, imageUri => {
-      this.setState({ image: imageUri });
-      this.analyzeImage();
-    }, error => console.error(error));
-  }
-
-  analyzeImage(){
-    let formData = new FormData();
-    formData.append('images_file', {uri: this.state.image });
-    formData.append('parameters', {uri: RNFS.MainBundlePath + '/myparams.json' })
-    axios.post(watson_API_url, formData)
-      .then( response => { console.log(JSON.stringify(response.data, null, 2))})
-      .catch( error => {console.log(error)});
-  }
-
   takePicture() {
     const options = {};
     //options.location = ...
     this.camera.capture({metadata: options})
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        this.props.imageTaken(data.path);
+        Actions.gallery();
+      })
       .catch(err => console.error(err));
   }
 
@@ -47,15 +34,18 @@ class CameraComponent extends Component {
           ref={(cam) => {
             this.camera = cam;
           }}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+          style={ styles.camera }
+          aspect={Camera.constants.Aspect.stretch}
+        >
+          <View style={styles.cameraBtnContainer}>
+            <Text>
+              <Icon name="photo" size={60} color="#FAFAFA" onPress={ () => Actions.gallery()} />
+              <Icon name="camera" size={60} color="#FAFAFA" onPress={this.takePicture.bind(this)} />
+              <Icon name="camera_front" size={60} color="#FAFAFA" />
+            </Text>
+
+          </View>
         </Camera>
-        <View style={{ flex: 1 }}>
-          {this.state.image?
-            <Image style={{ flex: 1 }} source={{ uri: this.state.image }} /> : null
-          }
-        </View>
       </View>
 
     );
@@ -66,11 +56,23 @@ const styles = {
   container: {
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-end'
   },
-  preview: {
-    flex: 10,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
+  camera: {
+    flex: 1,
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT
+  },
+  cameraBtnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: SCREEN_WIDTH,
+    backgroundColor: '#000'
   },
   capture: {
     flex: 0,
@@ -79,8 +81,15 @@ const styles = {
     color: '#000',
     padding: 10,
     margin: 40
+  },
+  galleryIcon: {
+
   }
 };
 
+const mapStateToProps = (state) => {
+  const { image } = state.camera;
+  return { image };
+}
 
-export default CameraComponent;
+export default connect(mapStateToProps, { imageTaken })(CameraComponent);

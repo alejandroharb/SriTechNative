@@ -9,7 +9,7 @@ class Home extends Component {
         <Text>This is our Home Page</Text>
         <Button
           title="Camera"
-          onPress={() => Actions.camera() }
+          onPress={() => Actions.visualization() }
           color="#1194f6"
         />
       </View>
