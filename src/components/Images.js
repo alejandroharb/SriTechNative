@@ -11,7 +11,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 class Images extends Component{
   constructor(){
     super();
-    this.state = { image: null }
+    this.state = { image: "" }
   }
 
   componentWillMount(){

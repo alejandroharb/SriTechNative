@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Image, Text, Dimensions } from 'react-native';
+import { View, Image, Text, Dimensions, CameraRoll, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 import { imageTaken } from '../actions/CameraActions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -12,7 +13,11 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 class CameraComponent extends Component {
   constructor(){
     super();
-    this.state = { image: null }
+    this.state = { image: null, galleryIcon: "" }
+  }
+
+  componentWillMount(){
+    this.fetchFirstImage();
   }
 
   takePicture() {
@@ -27,6 +32,19 @@ class CameraComponent extends Component {
       .catch(err => console.error(err));
   }
 
+  fetchFirstImage() {
+    //react native module, fetches first image from device gallery
+    CameraRoll.getPhotos({
+      first: 1,
+      assetType: 'Photos'
+    })
+      .then( roll => {
+        console.log(roll.edges[0].node.image.uri);
+
+        this.setState({ galleryIcon: roll.edges[0].node.image.uri });
+      });
+  }
+
   render(){
     return(
       <View style={styles.container}>
@@ -38,10 +56,14 @@ class CameraComponent extends Component {
           aspect={Camera.constants.Aspect.stretch}
         >
           <View style={styles.cameraBtnContainer}>
+            <TouchableHighlight onPress={()=> Actions.gallery()}>
+              <Image source={{uri: this.state.galleryIcon}} style={styles.galleryIcon} />
+            </TouchableHighlight>
             <Text>
-              <Icon name="photo" size={60} color="#FAFAFA" onPress={ () => Actions.gallery()} />
-              <Icon name="camera" size={60} color="#FAFAFA" onPress={this.takePicture.bind(this)} />
-              <Icon name="camera_front" size={60} color="#FAFAFA" />
+              <Icon name="camera" size={65} color="#FAFAFA" onPress={this.takePicture.bind(this)} />
+            </Text>
+            <Text>
+              <IonIcon name="ios-reverse-camera" style={styles.cameraReverseIcon} size={50} color="#FAFAFA" />
             </Text>
 
           </View>
@@ -83,7 +105,12 @@ const styles = {
     margin: 40
   },
   galleryIcon: {
-
+    width: 40,
+    height: 40,
+    marginLeft: 5
+  },
+  cameraReverseIcon:{
+    marginRight: 10
   }
 };
 
