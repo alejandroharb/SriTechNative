@@ -3,7 +3,7 @@ import { View, Image, Text, Dimensions, CameraRoll, TouchableHighlight } from 'r
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
-import { imageTaken } from '../actions/CameraActions';
+import { imageChosen } from '../../actions/CameraActions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
@@ -13,7 +13,11 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 class CameraComponent extends Component {
   constructor(){
     super();
-    this.state = { image: null, galleryIcon: "" }
+    this.state = {
+      image: null,
+      galleryIcon: "",
+      cameraOrientation: Camera.constants.Type.back
+    }
   }
 
   componentWillMount(){
@@ -25,8 +29,7 @@ class CameraComponent extends Component {
     //options.location = ...
     this.camera.capture({metadata: options})
       .then((data) => {
-        console.log(data);
-        this.props.imageTaken(data.path);
+        this.props.imageChosen(data.path);
         Actions.gallery();
       })
       .catch(err => console.error(err));
@@ -39,10 +42,29 @@ class CameraComponent extends Component {
       assetType: 'Photos'
     })
       .then( roll => {
-        console.log(roll.edges[0].node.image.uri);
-
         this.setState({ galleryIcon: roll.edges[0].node.image.uri });
       });
+  }
+
+  reverseCamera(){
+    switch(this.state.cameraOrientation){
+      case Camera.constants.Type.front:
+        return this.setState({ cameraOrientation: Camera.constants.Type.back});
+      case Camera.constants.Type.back:
+        return this.setState({ cameraOrientation: Camera.constants.Type.front});
+      default:
+        return this.setState({ cameraOrientation: Camera.constants.Type.back});
+    }
+  }
+
+  pickImage(){
+    //openSelectDialog(config, successCallBack, errorCallBack);
+    ImagePickerIOS.openSelectDialog(
+      {}, imageUri => {
+        // Redux update state
+        this.props.imageChosen(imageUri);
+        Actions.gallery();
+      }, cancel => { console.log(cancel)});
   }
 
   render(){
@@ -53,18 +75,21 @@ class CameraComponent extends Component {
             this.camera = cam;
           }}
           style={ styles.camera }
+          type={ this.state.cameraOrientation }
           aspect={Camera.constants.Aspect.stretch}
         >
           <View style={styles.cameraBtnContainer}>
-            <TouchableHighlight onPress={()=> Actions.gallery()}>
+            <TouchableHighlight onPress={()=> this.pickImage.bind(this)}>
               <Image source={{uri: this.state.galleryIcon}} style={styles.galleryIcon} />
             </TouchableHighlight>
             <Text>
               <Icon name="camera" size={65} color="#FAFAFA" onPress={this.takePicture.bind(this)} />
             </Text>
-            <Text>
-              <IonIcon name="ios-reverse-camera" style={styles.cameraReverseIcon} size={50} color="#FAFAFA" />
-            </Text>
+            <TouchableHighlight onPress={this.reverseCamera.bind(this)} >
+              <Text>
+                <IonIcon name="ios-reverse-camera" style={styles.cameraReverseIcon} size={50} color="#FAFAFA" />
+              </Text>
+            </TouchableHighlight>
 
           </View>
         </Camera>
@@ -119,4 +144,4 @@ const mapStateToProps = (state) => {
   return { image };
 }
 
-export default connect(mapStateToProps, { imageTaken })(CameraComponent);
+export default connect(mapStateToProps, { imageChosen })(CameraComponent);

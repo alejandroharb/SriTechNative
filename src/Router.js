@@ -1,8 +1,10 @@
 import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
-import Camera from './components/Camera';
+import Camera from './components/visualization/Camera';
 import Home from './components/Home';
-import Images from './components/Images';
+import Images from './components/visualization/Images';
+import CamMenu from './components/visualization/CamMenu';
+import AIResults from './components/visualization/AIResults';
 
 const RouterComponent = () => {
   return(
@@ -10,8 +12,10 @@ const RouterComponent = () => {
       <Scene key="main">
         <Scene key="menu" component={Home} title="Home" initial/>
         <Scene key="visualization">
-          <Scene key="camera" component={Camera} title="Get Picture Analysis" initial/>
-          <Scene key="gallery" component={Images} title="Choose Image to Analyze" />
+          <Scene key="visualizationMenu" component={CamMenu} title="Camera" initial />
+          <Scene key="camera" component={Camera} title="Foot Analysis" />
+          <Scene key="gallery" component={Images} title="Gallery" />
+          <Scene key="results" component={AIResults} title="Results" />
         </Scene>
       </Scene>
     </Router>
