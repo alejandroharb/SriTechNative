@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, Dimensions, CameraRoll, TouchableHighlight } from 'react-native';
+import { View, Image, Text, Dimensions, CameraRoll, TouchableHighlight, ImagePickerIOS } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
@@ -18,6 +18,8 @@ class CameraComponent extends Component {
       galleryIcon: "",
       cameraOrientation: Camera.constants.Type.back
     }
+
+    this.pickImage = this.pickImage.bind(this);
   }
 
   componentWillMount(){
@@ -58,6 +60,7 @@ class CameraComponent extends Component {
   }
 
   pickImage(){
+    console.log("tapped gallery icon")
     //openSelectDialog(config, successCallBack, errorCallBack);
     ImagePickerIOS.openSelectDialog(
       {}, imageUri => {
@@ -79,7 +82,7 @@ class CameraComponent extends Component {
           aspect={Camera.constants.Aspect.stretch}
         >
           <View style={styles.cameraBtnContainer}>
-            <TouchableHighlight onPress={()=> this.pickImage.bind(this)}>
+            <TouchableHighlight onPress={()=> this.pickImage()}>
               <Image source={{uri: this.state.galleryIcon}} style={styles.galleryIcon} />
             </TouchableHighlight>
             <Text>

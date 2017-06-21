@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CameraPickerModal } from '../common';
 import { imageChosen } from '../../actions/CameraActions';
+import NavBar from '../common/NavBar';
 
 class CamMenu extends Component {
   constructor(){
@@ -44,15 +45,18 @@ class CamMenu extends Component {
   }
 
   render(){
+    const { mainContainer } = styles;
     return(
-      <View>
+      <View style={mainContainer}>
+
         <View style={styles.wallpaper}>
           <Icon name="photo-camera" size={250} color={'#dcdcdc'}/>
           <TouchableHighlight style={{marginTop: 50}} onPress={this.toggleModal.bind(this)}>
             <Text style={styles.linkText}>Select an Image to Begin</Text>
           </TouchableHighlight>
         </View>
-        <View style={{flex:1}}>
+
+        <View>
           <CameraPickerModal
             visible={this.state.modalVisible}
             onPressLibrary={ this.onPressLibrary.bind(this) }
@@ -60,14 +64,23 @@ class CamMenu extends Component {
             onPressCancel={ this.toggleModal.bind(this) }
           />
         </View>
+
+        <NavBar />
+
       </View>
     )
   }
 }
 
 const styles = {
+  mainContainer:{
+    flex:1,
+    flexDirection:'column',
+    alignItems: 'stretch',
+    justifyContent: 'flex-end'
+  },
   wallpaper: {
-    flex:10,
+    flex:8,
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginTop: 80

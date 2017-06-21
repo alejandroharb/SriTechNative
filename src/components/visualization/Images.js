@@ -27,31 +27,39 @@ class Images extends Component{
   }
 
   render(){
-    const { imageContainer, imageStyle, buttonStyle, buttonTextStyle } = styles;
+    const { imageContainer, imageStyle, buttonContainer, buttonStyle, buttonTextStyle } = styles;
     const { image } = this.props;
 
     return(
       <View style={imageContainer}>
-        <Image
-          style={imageStyle}
-          source={{ uri: image }}
-        />
-        <CardSection>
-          <Button
-            onPress={this.toggleModal.bind(this)}
-            customTextStyle={buttonTextStyle}
-            customButtonStyle={buttonStyle}
+
+          <Card style={{flex: 8}}>
+            <CardSection style={{flex: 1}}>
+              <Image
+                style={imageStyle}
+                source={{ uri: image }}
+              />
+            </CardSection>
+          </Card>
+
+          <CardSection style={buttonContainer}>
+              <Button
+                onPress={this.toggleModal.bind(this)}
+                customTextStyle={buttonTextStyle}
+                customButtonStyle={buttonStyle}
+              >
+                Analyze Image
+              </Button>
+          </CardSection>
+
+          <Confirm
+            onAccept={this.onAccept.bind(this)}
+            onDecline={this.onDecline.bind(this)}
+            visible={this.state.showModal}
           >
-            Analyze Image
-          </Button>
-        </CardSection>
-        <Confirm
-          onAccept={this.onAccept.bind(this)}
-          onDecline={this.onDecline.bind(this)}
-          visible={this.state.showModal}
-        >
-          Analyze this Image?
-        </Confirm>
+            Analyze this Image?
+          </Confirm>
+
       </View>
     )
   }
@@ -65,14 +73,22 @@ const styles = {
     justifyContent: 'center',
   },
   imageStyle: {
-    flex: 8,
-    width:SCREEN_WIDTH
+    width:'100%',
+    height: 'auto'
   },
   buttonTextStyle: {
-    color:'#FAFAFA'
+    color:'#FAFAFA',
+    fontSize: 18
   },
   buttonStyle: {
-    backgroundColor: '#77d24c'
+    backgroundColor: '#77d24c',
+    borderColor: '#67a165',
+    marginLeft: 0,
+    marginRight: 0
+  },
+  buttonContainer: {
+    flex: 1,
+    borderBottomWidth: 0
   }
 }
 

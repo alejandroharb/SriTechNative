@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection } from './common';
+import NavBar from './common/NavBar';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -10,12 +11,13 @@ class Home extends Component {
     super();
   }
   render(){
+    const { buttonTextStyle, buttonStyle, homeContainer, menuSection } = styles;
+
     return(
-      <View style={styles.homeContainer}>
-        <Text style={styles.tempText}> Home Page</Text>
-        <Button onPress={() => Actions.visualization()}>
-          <Icon name="photo-camera" size={40} color={'#dcdcdc'}/>
-        </Button>
+      <View style={homeContainer}>
+        <View style={menuSection}>
+        </View>
+        <NavBar />
       </View>
     )
   }
@@ -24,13 +26,23 @@ class Home extends Component {
 const styles = {
   homeContainer: {
     flex:1,
-    alignItems: 'flex-end',
-    justifyContent: 'center'
+    flexDirection:'column',
+    alignItems: 'stretch',
+    justifyContent: 'flex-end'
+  },
+  menuSection: {
+    flex: 8
   },
   tempText: {
     flex: 10,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  buttonTextStyle: {
+    color:'#FAFAFA'
+  },
+  buttonStyle: {
+    backgroundColor: '#4285f4'
   }
 }
 
