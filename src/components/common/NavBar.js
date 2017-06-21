@@ -60,8 +60,7 @@ class NavBar extends Component {
 
 const styles = {
   container: {
-    flex: 1,
-    height:80,
+    height:60,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -78,7 +77,6 @@ const styles = {
 
 mapStateToProps = (state) => {
   const { menuIcon, healingIcon, cameraIcon, mapIcon, profileIcon } = state.navBar;
-  console.log(state.navBar)
   return { menuIcon, healingIcon, cameraIcon, mapIcon, profileIcon };
 }
 
