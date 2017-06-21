@@ -2,7 +2,7 @@ import { IMAGE_CHOSEN, ANALYSIS_SUCCESS } from '../actions/types';
 
 const INITIAL_STATE = {
   image: "",
-  results: {}
+  watsonResults: {}
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -10,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
     case IMAGE_CHOSEN:
       return { ...state, image: action.payload };
     case ANALYSIS_SUCCESS:
-      return { ...state, results: action.payload };
+      return { ...state, watsonResults: action.payload };
     default:
       return state;
   }
