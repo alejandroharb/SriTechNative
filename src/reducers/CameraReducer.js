@@ -1,8 +1,12 @@
-import { IMAGE_CHOSEN, ANALYSIS_SUCCESS } from '../actions/types';
+import {
+  IMAGE_CHOSEN,
+  ANALYSIS_SUCCESS
+} from '../actions/types';
 
 const INITIAL_STATE = {
   image: "",
-  watsonResults: {}
+  watsonResults: {},
+  recommendation: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
