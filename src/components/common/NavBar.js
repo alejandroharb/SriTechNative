@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -48,7 +48,10 @@ class NavBar extends Component {
   render(){
     return(
       <View style={styles.container}>
-        <Icon name="dashboard" size={30} color={this.props.menuIcon} onPress={ () => this.pressMenu() }/>
+        <View style={{flex:1, justifyContent: 'center'}}>
+          <Icon name="dashboard" size={30} color={this.props.menuIcon} onPress={ () => this.pressMenu() }/>
+          <Text>Home</Text>
+        </View>
         <Icon name="healing" size={30} color={this.props.healingIcon} onPress={ () => this.pressHealing() }/>
         <Icon name="photo-camera" size={30} color={this.props.cameraIcon} onPress={ () => this.pressCamera() }/>
         <Icon name="map" size={30} color={this.props.mapIcon} onPress={ () => this.pressMap() }/>
