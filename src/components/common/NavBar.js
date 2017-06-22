@@ -48,10 +48,7 @@ class NavBar extends Component {
   render(){
     return(
       <View style={styles.container}>
-        <View style={{flex:1, justifyContent: 'center'}}>
-          <Icon name="dashboard" size={30} color={this.props.menuIcon} onPress={ () => this.pressMenu() }/>
-          <Text>Home</Text>
-        </View>
+        <Icon name="dashboard" size={30} color={this.props.menuIcon} onPress={ () => this.pressMenu() }/>
         <Icon name="healing" size={30} color={this.props.healingIcon} onPress={ () => this.pressHealing() }/>
         <Icon name="photo-camera" size={30} color={this.props.cameraIcon} onPress={ () => this.pressCamera() }/>
         <Icon name="map" size={30} color={this.props.mapIcon} onPress={ () => this.pressMap() }/>
