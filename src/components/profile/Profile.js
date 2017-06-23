@@ -8,11 +8,12 @@ class Profile extends Component {
   }
 
   render(){
-    const { mainContainer, contentContainer } = styles;
+    const { mainContainer, contentContainer, topContainer, image } = styles;
 
     return(
       <View style={mainContainer}>
-        <View style={imgContainer}>
+        <View style={topContainer}>
+          <Icon name="person" size={90} color="#dcdcdc" style={image}/>
         </View>
 
         <View style={contentContainer}>
@@ -27,7 +28,7 @@ const styles = {
     flex: 1,
     flexDirection: 'column'
   },
-  imgContainer: {
+  topContainer: {
     flex: 2,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -37,6 +38,14 @@ const styles = {
   contentContainer:{
     flex: 3,
     flexDirection: 'column',
+  },
+  image: {
+    backgroundColor: '#FAFAFA',
+    elevation:10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.4,
+    shadowRadius: 5
   }
 }
 

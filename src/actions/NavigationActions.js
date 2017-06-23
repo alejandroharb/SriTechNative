@@ -33,7 +33,7 @@ export const changeIcon = (navIcon) => {
       // Actions.map();
       return { type: MAP_NAV_PRESSED, payload: { initial: INITIAL_STATE, mapIcon: navIconActiveColor }};
     case 'profileIcon':
-      //Actions.profile();
+      Actions.profilePage();
       return { type: PROFILE_NAV_PRESSED, payload: { initial: INITIAL_STATE, profileIcon: navIconActiveColor}};
   }
 };

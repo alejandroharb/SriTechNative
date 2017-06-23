@@ -21,6 +21,11 @@ class Home extends Component {
               Info
             </Button>
           </CardSection>
+          <CardSection>
+            <Button onPress={() => Actions.profilePage()} >
+              Profile
+            </Button>
+          </CardSection>
         </View>
         <NavBar />
       </View>

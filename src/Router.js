@@ -8,6 +8,7 @@ import AIResults from './components/visualization/AIResults';
 import Healing from './components/healing/HealingMenu';
 import Info from './components/infoGraphics/Info';
 import InfoImage from './components/infoGraphics/InfoImage';
+import Profile from './components/profile/Profile';
 
 const RouterComponent = () => {
   return(
@@ -21,12 +22,15 @@ const RouterComponent = () => {
         </Scene>
 
         <Scene key="healing" component={Healing} title="Healing" />
+
         <Scene key="visualization">
           <Scene key="visualizationMenu" component={CamMenu} title="Camera" type={ActionConst.REPLACE} initial />
           <Scene key="camera" component={Camera} title="Foot Analysis" />
           <Scene key="gallery" component={Images} title="Gallery" />
           <Scene key="results" component={AIResults} title="Results" />
         </Scene>
+
+        <Scene key="profilePage" component={Profile} />
       </Scene>
     </Router>
   )
