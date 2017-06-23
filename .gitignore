@@ -1,5 +1,5 @@
 # OSX
-ios/**
+#
 .DS_Store
 
 # Xcode
@@ -51,12 +51,3 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
-
-
-
-config/watsonAPI.js
-ios/SriTechApp.xcodeproj/project.pbxproj
-
-ios/**
-src/config/watsonAPI.js
-
