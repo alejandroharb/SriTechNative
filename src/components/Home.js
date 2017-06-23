@@ -16,6 +16,11 @@ class Home extends Component {
     return(
       <View style={homeContainer}>
         <View style={menuSection}>
+          <CardSection>
+            <Button onPress={() => Actions.infographs()} >
+              Info
+            </Button>
+          </CardSection>
         </View>
         <NavBar />
       </View>

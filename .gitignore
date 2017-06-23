@@ -1,5 +1,5 @@
 # OSX
-#
+ios/**
 .DS_Store
 
 # Xcode
@@ -53,5 +53,4 @@ fastlane/Preview.html
 fastlane/screenshots
 
 
-config/watsonAPI.js
-ios/SriTechApp.xcodeproj/project.pbxproj
+src/config/watsonAPI.js

@@ -24,7 +24,7 @@ export const changeIcon = (navIcon) => {
       Actions.menu();
       return { type: MENU_NAV_PRESSED, payload: { initial: INITIAL_STATE, menuIcon: navIconActiveColor }};
     case 'healingIcon':
-      // Actions.healing();
+      Actions.info();
       return { type: HEALING_NAV_PRESSED, payload: { initial: INITIAL_STATE, healingIcon: navIconActiveColor }};
     case 'cameraIcon':
       Actions.visualization();
