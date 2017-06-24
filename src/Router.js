@@ -9,10 +9,18 @@ import Healing from './components/healing/HealingMenu';
 import Info from './components/infoGraphics/Info';
 import InfoImage from './components/infoGraphics/InfoImage';
 import Profile from './components/profile/Profile';
+import Landing from './components/Landing';
+import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
 
 const RouterComponent = () => {
   return(
     <Router sceneStyle={{ paddingTop: 65}}>
+      <Scene key="authentication" >
+        <Scene key="landing" component={Landing} initial/>
+        <Scene key="login" component={Login} />
+        <Scene key="signup" component={SignUp} title="Create Account" />
+      </Scene>
       <Scene key="main">
         <Scene key="menu" component={Home} title="Home" initial />
 

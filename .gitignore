@@ -54,9 +54,6 @@ fastlane/screenshots
 
 
 
-config/watsonAPI.js
-ios/SriTechApp.xcodeproj/project.pbxproj
-
-ios/**
 src/config/watsonAPI.js
-
+src/config/firebase.js
+ios/SriTechApp.xcodeproj/project.pbxproj
