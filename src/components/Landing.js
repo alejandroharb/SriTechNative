@@ -8,7 +8,7 @@ class Landing extends Component {
   render(){
     return(
 
-      <View>
+      <View style={{paddingTop: 30}}>
         <Image source={require('../assets/images/logo.png')} style={styles.logo} />
         <Card>
           <Login />

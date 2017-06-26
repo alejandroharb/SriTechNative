@@ -3,7 +3,7 @@ import { Text, View, Modal } from 'react-native';
 import { CardSection } from './CardSection';
 import { Button } from './Button';
 
-const Confirm = ({ children, visible, onAccept, onDecline }) => {
+const Confirm = ({ children, visible, onAccept, onDecline, customContainerStyle }) => {
   //destructuring
   const { containerStyle, textStyle, cardSectionStyle } = styles;
 
@@ -14,14 +14,14 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
       animationType="slide"
       onRequestClone={() => {}}
     >
-      <View style={containerStyle}>
-        <CardSection style={cardSectionStyle}>
-          <Text style={textStyle}>{children}</Text>
-        </CardSection>
-        <CardSection>
-          <Button onPress={onAccept}>Yes</Button>
-          <Button onPress={onDecline}>No</Button>
-        </CardSection>
+      <View style={[containerStyle, customContainerStyle]}>
+          <CardSection style={cardSectionStyle}>
+            <Text style={textStyle}>{children}</Text>
+          </CardSection>
+          <CardSection>
+            <Button onPress={onAccept}>Yes</Button>
+            <Button onPress={onDecline}>No</Button>
+          </CardSection>
       </View>
     </Modal>
   );

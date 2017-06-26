@@ -27,7 +27,7 @@ class Images extends Component{
   }
 
   render(){
-    const { imageContainer, imageStyle, buttonContainer, buttonStyle, buttonTextStyle } = styles;
+    const { imageContainer, imageStyle, buttonContainer, buttonStyle, buttonTextStyle, modal } = styles;
     const { image } = this.props;
 
     return(
@@ -53,6 +53,7 @@ class Images extends Component{
           </CardSection>
 
           <Confirm
+            customContainerStyle={modal}
             onAccept={this.onAccept.bind(this)}
             onDecline={this.onDecline.bind(this)}
             visible={this.state.showModal}
@@ -71,6 +72,7 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 50
   },
   imageStyle: {
     width:'100%',
@@ -81,14 +83,18 @@ const styles = {
     fontSize: 18
   },
   buttonStyle: {
-    backgroundColor: '#77d24c',
-    borderColor: '#67a165',
+    backgroundColor: '#4285f4',
+    borderColor: '#4285f4',
     marginLeft: 0,
     marginRight: 0
   },
   buttonContainer: {
     flex: 1,
     borderBottomWidth: 0
+  },
+  modal: {
+    paddingRight: 30,
+    paddingLeft: 30
   }
 }
 

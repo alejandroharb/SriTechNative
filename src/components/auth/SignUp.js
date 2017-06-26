@@ -134,7 +134,7 @@ class SignUp extends Component {
                 minimumValue={30}
                 maximumValue={100}
                 step={2}
-                value={this.props.weight}
+                value={30}
                 onValueChange={this.onWeightChange.bind(this)}
               />
             </View>
@@ -154,7 +154,7 @@ class SignUp extends Component {
                 minimumValue={0}
                 maximumValue={300}
                 step={2}
-                value={this.props.height}
+                value={100}
                 onValueChange={this.onHeightChange.bind(this)}
               />
             </View>
@@ -207,7 +207,6 @@ const styles = {
 
 const mapStateToProps = (state) => {
   const { email, password, name, birthdate, gender, weight, height, error, loading } = state.auth;
-  console.log(state.auth);
   return { email, password, name, birthdate, gender, weight, height, error, loading };
 }
 

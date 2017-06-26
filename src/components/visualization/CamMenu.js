@@ -5,7 +5,6 @@ import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CameraPickerModal } from '../common';
 import { imageChosen } from '../../actions/CameraActions';
-import NavBar from '../common/NavBar';
 
 class CamMenu extends Component {
   constructor(){
@@ -64,8 +63,6 @@ class CamMenu extends Component {
             onPressCancel={ this.toggleModal.bind(this) }
           />
         </View>
-
-        <NavBar />
 
       </View>
     )

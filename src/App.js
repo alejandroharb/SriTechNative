@@ -6,6 +6,7 @@ import ReduxThunk from 'redux-thunk';
 import Router from './Router';
 import reducers from './reducers';
 import firebase from './config/firebase';
+import RouterTest from './RouterTest';
 
 class App extends Component {
   constructor(){

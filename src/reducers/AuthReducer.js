@@ -48,7 +48,7 @@ export default (state = INITIAL_STATE, action) => {
     case HEIGHT_CHANGED:
       return { ...state, height: action.payload };
     case CREATE_USER_SUCCESS:
-      return { ...state, ...INITIAL_STATE, user: action.payload };
+      return { ...state,  user: action.payload };
     case CREATE_USER_FAIL:
       return { ...state, error: 'Account Creation Failed.', loading: false };
     default:

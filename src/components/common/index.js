@@ -7,3 +7,4 @@ export * from './Spinner';
 export * from './Confirm';
 export * from './CameraPickerModal';
 export * from './NavBar';
+export * from './RowText';

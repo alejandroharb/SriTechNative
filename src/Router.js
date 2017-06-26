@@ -1,5 +1,5 @@
-import React from 'react';
-import { Scene, Router, Actions, ActionConst } from 'react-native-router-flux';
+import React, {Component} from 'react';
+import { Scene, Router, Actions, ActionConst, TabBar } from 'react-native-router-flux';
 import Camera from './components/visualization/Camera';
 import Home from './components/Home';
 import Images from './components/visualization/Images';
@@ -12,36 +12,125 @@ import Profile from './components/profile/Profile';
 import Landing from './components/Landing';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { navigateToProfile } from './actions/NavigationActions';
+import { connect } from 'react-redux';
 
-const RouterComponent = () => {
-  return(
-    <Router sceneStyle={{ paddingTop: 65}}>
-      <Scene key="authentication" >
-        <Scene key="landing" component={Landing} initial/>
-        <Scene key="login" component={Login} />
-        <Scene key="signup" component={SignUp} title="Create Account" />
-      </Scene>
-      <Scene key="main">
-        <Scene key="menu" component={Home} title="Home" initial />
+// Simple component to render something in place of icon
 
-        <Scene key="infographs" >
-          <Scene key="info" component={Info} title="Info" initial/>
-          <Scene key="infoImage" component={InfoImage} title="Info"/>
+
+class RouterComponent extends Component {
+  constructor(){
+    super();
+
+    //bind all methods to component's 'this'
+    this.pressProfile = this.pressProfile.bind(this);
+    this.TabIcon = this.TabIcon.bind(this);
+  }
+
+  TabIcon({ selected, title }) {
+    switch(title){
+      case "home":
+        return (
+          <Icon name="dashboard" size={30} color={selected ? '#3d88ec' :'#dcdcdc'} />
+        );
+      case "selfcare":
+        return (
+          <Icon name="healing" size={30} color={selected ? '#3d88ec' :'#dcdcdc'} />
+        );
+      case "camera":
+        return (
+          <Icon name="photo-camera" size={30} color={selected ? '#3d88ec' :'#dcdcdc'} />
+        );
+      case "map":
+        return (
+          <Icon name="map" size={30} color={selected ? '#3d88ec' :'#dcdcdc'} />
+        );
+      case "profile":
+        if( selected ) { this.pressProfile() }
+        return (
+          <Icon name="person" size={30} color={selected ? '#3d88ec' :'#dcdcdc'} />
+        );
+    }
+
+  }
+
+  pressProfile(){
+    this.props.navigateToProfile();
+  }
+
+  render(){
+    return(
+      <Router sceneStyle={{ paddingTop: 0}} navigationBarStyle={styles.navBarStyle} titleStyle={styles.navBarTitle}>
+
+        <Scene key="authentication" initial hideNavBar>
+          <Scene key="landing" component={Landing} initial/>
+          <Scene key="login" component={Login} />
+          <Scene key="signup" component={SignUp} title="Create Account" />
         </Scene>
 
-        <Scene key="healing" component={Healing} title="Healing" />
+        <Scene key="root">
+          {/* Tab Container */}
+          <Scene key="main" tabs={true} tabBarStyle={styles.tabBar} >
 
-        <Scene key="visualization">
-          <Scene key="visualizationMenu" component={CamMenu} title="Camera" type={ActionConst.REPLACE} initial />
-          <Scene key="camera" component={Camera} title="Foot Analysis" />
-          <Scene key="gallery" component={Images} title="Gallery" />
-          <Scene key="results" component={AIResults} title="Results" />
+            {/* Tab and it's scenes */}
+            <Scene key="homeMenu" icon={this.TabIcon} title="home" >
+              <Scene key="menu" component={Home} title="Home" initial />
+              <Scene key="infographs" >
+                <Scene key="info" component={Info} title="Info" initial/>
+                <Scene key="infoImage" component={InfoImage} title="Info"/>
+              </Scene>
+            </Scene>
+            {/* Tab and it's scenes */}
+            <Scene key="healing" icon={this.TabIcon} title="selfcare" >
+              <Scene key="healingContent" component={Healing} title="Healing" />
+            </Scene>
+            {/* Tab and it's scenes */}
+            <Scene key="visualization" icon={this.TabIcon} title="camera" >
+                <Scene key="visualizationMenu" component={CamMenu} title="Camera" initial />
+                <Scene key="camera" component={Camera} title="Foot Analysis" hideNavBar/>
+                <Scene key="gallery" component={Images} title="Gallery" sceneStyle={{paddingTop: 15}} hideNavBar/>
+                <Scene key="results" component={AIResults} title="Results" hideNavBar={false}/>
+            </Scene>
+            {/* Tab and it's scenes */}
+            <Scene key="map" icon={this.TabIcon} title="map">
+            </Scene>
+            {/* Tab and it's scenes */}
+            <Scene key="profile" icon={this.TabIcon} title="profile" hideNavBar>
+              <Scene key="profilePage" component={Profile} />
+            </Scene>
+
+          </Scene>
         </Scene>
-
-        <Scene key="profilePage" component={Profile} />
-      </Scene>
-    </Router>
-  )
+      </Router>
+    );
+  }
 }
 
-export default RouterComponent;
+const styles = {
+  tabBar: {
+    backgroundColor: '#ffffff',
+    borderTopWidth: 1,
+    borderColor: '#ddd',
+    elevation:1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2
+  },
+  navBarStyle: {
+    backgroundColor: '#4285f4',
+    paddingBottom: 15
+  },
+  navBarTitle: {
+    color: '#FAFAFA',
+    fontSize: 24,
+    fontWeight: '300'
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {};
+}
+
+export default connect(mapStateToProps, { navigateToProfile })(RouterComponent);

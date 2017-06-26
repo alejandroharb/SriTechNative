@@ -1,4 +1,5 @@
 {
-  "owners":["Dogs"],
-  "classifier_ids": ["Dogs_596994746", "default"]
+  "owners":["Wagner"],
+  "classifier_ids": ["Wagner_582134215"],
+  "threshold": 0.2
 }

@@ -15,7 +15,7 @@ import {
 
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
-
+import moment from 'moment';
 
 export const emailChanged = (text) => {
   return {
@@ -51,7 +51,7 @@ const loginUserSuccess = (dispatch, user) => {
     payload: user
   })
 
-  Actions.main();
+  Actions.root();
 }
 
 export const nameChanged = (text) => {
@@ -90,13 +90,17 @@ export const heightChanged = (height) => {
 }
 
 export const userCreate = ({email, password, name, birthdate, gender, weight, height}) => {
+  const birth_date = moment(birthdate).format();
+  console.log(`birth_date: ${birth_date}`);
   return (dispatch) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then( user => {
-        console.log(user);
         firebase.database().ref(`users/${user.uid}/records/`)
-          .set({ name, birthdate, gender, weight, height })
-          .then( user => createUserSuccess(dispatch, user));
+          .set({ name, birthdate: birth_date, gender, weight, height })
+          .then( () => {
+            console.log(user);
+            createUserSuccess(dispatch, user)
+          });
       })
       .catch( () => createUserFail(dispatch));
   }

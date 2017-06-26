@@ -5,7 +5,7 @@ import { Button } from './Button';
 
 const CameraPickerModal = ({ visible, onPressLibrary, onPressCamera, onPressCancel }) => {
   //destructuring
-  const { containerStyle, textStyle, cardSectionStyle } = styles;
+  const { containerStyle, textStyle, cardSectionStyle, topContainer, button } = styles;
 
   return(
     <Modal
@@ -15,12 +15,17 @@ const CameraPickerModal = ({ visible, onPressLibrary, onPressCamera, onPressCanc
       onRequestClone={() => {}}
     >
       <View style={containerStyle}>
-        <CardSection style={cardSectionStyle}>
-          <Button onPress={onPressCamera} >Take Photo</Button>
-          <Button onPress={onPressLibrary}>Choose from Library</Button>
-        </CardSection>
-        <CardSection>
-          <Button onPress={onPressCancel}>Cancel</Button>
+
+        <View style={topContainer} >
+          <CardSection style={cardSectionStyle}>
+            <Button onPress={onPressCamera} customButtonStyle={[button, {borderBottomWidth: 1, borderColor: '#ddd'}]} >Take Photo</Button>
+
+            <Button onPress={onPressLibrary} customButtonStyle={button} >Choose from Library</Button>
+          </CardSection>
+        </View>
+
+        <CardSection style={{marginTop: 7, borderRadius: 15}}>
+          <Button onPress={onPressCancel} customButtonStyle={button} >Cancel</Button>
         </CardSection>
       </View>
     </Modal>
@@ -29,7 +34,12 @@ const CameraPickerModal = ({ visible, onPressLibrary, onPressCamera, onPressCanc
 
 const styles = {
   cardSectionStyle: {
-    justifyContent: 'center'
+    borderRadius: 15,
+    flex:1,
+    flexDirection:'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    margin: 0
   },
   textStyle: {
     flex: 1,
@@ -39,9 +49,20 @@ const styles = {
   },
   containerStyle: {
     backgroundColor: 'rgba(0,0,0,0.75)',
+    flexDirection: 'column',
     position: 'relative',
     flex:1,
-    justifyContent: 'center'
+    justifyContent: 'flex-end',
+    paddingRight: 15,
+    paddingLeft: 15,
+    paddingBottom: 5
+  },
+  topContainer: {
+    height: 100
+  },
+  button: {
+    borderWidth: 0,
+    flex:1
   }
 }
 
