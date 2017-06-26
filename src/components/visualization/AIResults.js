@@ -3,7 +3,6 @@ import { View, Text, Image, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Button } from '../common';
 import { Suggestions } from './components';
-import NavBar from '../common/NavBar';
 
 class AIResults extends Component{
   constructor(){
@@ -12,9 +11,9 @@ class AIResults extends Component{
   }
 
   render(){
-    const { image, watsonResults, recommendation } = this.props;
+    const { image, watsonResults } = this.props;
     const { mainContainer, contentsContainer, imageResultsSummaryContainer, resultsTitle, resultsSubtitle, buttonContainer, buttonStyle } = styles;
-
+    
     return(
       <View style={ mainContainer }>
 
@@ -22,15 +21,15 @@ class AIResults extends Component{
           <View style={imageResultsSummaryContainer}>
             <Image style={{ width: 100, height: 100}} source={ {uri: image} }/>
             <View>
-              <Text style={resultsTitle}>{ watsonResults[0].class }</Text>
-              <Text style={resultsSubtitle}>{ watsonResults[0].score }% Match</Text>
+              <Text style={resultsTitle}>{ watsonResults.matchResults ? watsonResults.matchResults[0].class : "No Detection"  }</Text>
+              <Text style={resultsSubtitle}>{ watsonResults.matchResults ? watsonResults.matchResults[0].score : "" } Match</Text>
             </View>
           </View>
 
           <View>
             <Suggestions
               title="Suggestions"
-              suggestion={ watsonResults[0].recommendation }
+              suggestion={ watsonResults.matchResults ? watsonResults.matchResults[0].recommendation : watsonResults.recommendation }
             />
           </View>
 
@@ -44,7 +43,6 @@ class AIResults extends Component{
           </CardSection>
         </ScrollView>
 
-        <NavBar />
       </View>
     );
   }
@@ -55,6 +53,7 @@ const styles = {
     flex:1,
     flexDirection:'column',
     alignItems: 'stretch',
+    marginTop: 80
   },
   contentsContainer:{
     flex: 8,
