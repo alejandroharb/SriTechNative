@@ -30,18 +30,18 @@ class Home extends Component {
 				<Image style={{width: undefined}} source={info}>
 					<View style={{flex:1, justifyContent: 'flex-end', flexDirection: 'column'}}>
 						<Text style={textSection}>
-							info
+							foot care
 						</Text>
 					</View>
 				</Image>
 			</TouchableOpacity>
 		</View>
         <View style={{marginLeft: 40, marginRight: 10, height: 136, backgroundColor: 'powderblue'}}>
-			<TouchableOpacity>
+			<TouchableOpacity onPress={ () => Actions.diaries() }>
 				<Image style={{width: undefined}} source={userstories}>
 					<View style={{flex:1, justifyContent: 'flex-end', flexDirection: 'column'}}>
 						<Text style={textSection}>
-							user{"\n"}stories
+							community{"\n"}diaries
 						</Text>
 					</View>
 				</Image>
@@ -55,7 +55,7 @@ class Home extends Component {
 				<Image style={{width: undefined}} source={videos}>
 					<View style={{flex:1, justifyContent: 'flex-end', flexDirection: 'column'}}>
 						<Text style={textSection}>
-							videos
+							education
 						</Text>
 					</View>
 				</Image>
@@ -108,8 +108,8 @@ const styles = {
 	  color: 'white',
 	  fontWeight: '300',
 	  backgroundColor: 'transparent',
-	  fontSize: 25,
-	  paddingLeft: 12,
+	  fontSize: 20,
+	  paddingLeft: 6,
 	  paddingBottom: 6
   }
 }

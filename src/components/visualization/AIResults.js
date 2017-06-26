@@ -13,7 +13,7 @@ class AIResults extends Component{
   render(){
     const { image, watsonResults } = this.props;
     const { mainContainer, contentsContainer, imageResultsSummaryContainer, resultsTitle, resultsSubtitle, buttonContainer, buttonStyle } = styles;
-    
+
     return(
       <View style={ mainContainer }>
 
@@ -22,7 +22,6 @@ class AIResults extends Component{
             <Image style={{ width: 100, height: 100}} source={ {uri: image} }/>
             <View>
               <Text style={resultsTitle}>{ watsonResults.matchResults ? watsonResults.matchResults[0].class : "No Detection"  }</Text>
-              <Text style={resultsSubtitle}>{ watsonResults.matchResults ? watsonResults.matchResults[0].score : "" } Match</Text>
             </View>
           </View>
 

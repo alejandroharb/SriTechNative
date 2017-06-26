@@ -15,6 +15,7 @@ import SignUp from './components/auth/SignUp';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { navigateToProfile } from './actions/NavigationActions';
 import { connect } from 'react-redux';
+import CommunityDiary from './components/diaries/Diary';
 
 // Simple component to render something in place of icon
 
@@ -80,6 +81,7 @@ class RouterComponent extends Component {
                 <Scene key="info" component={Info} title="Info" initial/>
                 <Scene key="infoImage" component={InfoImage} title="Info"/>
               </Scene>
+              <Scene key="diaries" component={CommunityDiary} title="Diaries"/>
             </Scene>
             {/* Tab and it's scenes */}
             <Scene key="healing" icon={this.TabIcon} title="selfcare" >
