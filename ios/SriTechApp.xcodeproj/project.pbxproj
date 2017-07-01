@@ -48,8 +48,9 @@
 		905A1E051EFB395600FF7416 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 905A1DFB1EFB395600FF7416 /* Octicons.ttf */; };
 		905A1E061EFB395600FF7416 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 905A1DFC1EFB395600FF7416 /* SimpleLineIcons.ttf */; };
 		905A1E071EFB395600FF7416 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 905A1DFD1EFB395600FF7416 /* Zocial.ttf */; };
-		90F2161D1EFB40A3003108B9 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F2161C1EFB4071003108B9 /* libRCTCameraRoll.a */; };
 		90F2161F1EFB41E2003108B9 /* myparams.json in Resources */ = {isa = PBXBuildFile; fileRef = 90F2161E1EFB41E2003108B9 /* myparams.json */; };
+		D11ABB911F02B20E00B2755A /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D11ABB701F02AC4B00B2755A /* libRCTOrientation.a */; };
+		D1D592401F0303E900E3A3DA /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F2161C1EFB4071003108B9 /* libRCTCameraRoll.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +292,20 @@
 			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
 			remoteInfo = RCTCameraRoll;
 		};
+		D11ABB6F1F02AC4B00B2755A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D11ABB5F1F02AC4900B2755A /* RCTOrientation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTOrientation;
+		};
+		D11ABB881F02ADA900B2755A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D11ABB5F1F02AC4900B2755A /* RCTOrientation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 58B511DA1A9E6C8500147676;
+			remoteInfo = RCTOrientation;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -332,6 +347,7 @@
 		905A1DFD1EFB395600FF7416 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		90F216171EFB4071003108B9 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		90F2161E1EFB41E2003108B9 /* myparams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myparams.json; path = "/Users/alejandroharb/Documents/Web-Programming/code/ReactNativeWorkspace/SriTechApp/ios/myparams.json"; sourceTree = "<absolute>"; };
+		D11ABB5F1F02AC4900B2755A /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,7 +363,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90F2161D1EFB40A3003108B9 /* libRCTCameraRoll.a in Frameworks */,
+				D1D592401F0303E900E3A3DA /* libRCTCameraRoll.a in Frameworks */,
+				D11ABB911F02B20E00B2755A /* libRCTOrientation.a in Frameworks */,
 				905A1DF21EFB37FA00FF7416 /* libRNVectorIcons.a in Frameworks */,
 				905A1DEB1EFB379000FF7416 /* libRNFS.a in Frameworks */,
 				905A1DC61EFB366000FF7416 /* libRCTCamera.a in Frameworks */,
@@ -520,6 +537,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D11ABB5F1F02AC4900B2755A /* RCTOrientation.xcodeproj */,
 				90F216171EFB4071003108B9 /* RCTCameraRoll.xcodeproj */,
 				905A1DEC1EFB37ED00FF7416 /* RNVectorIcons.xcodeproj */,
 				905A1DE21EFB375100FF7416 /* RNFS.xcodeproj */,
@@ -622,6 +640,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D11ABB601F02AC4900B2755A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D11ABB701F02AC4B00B2755A /* libRCTOrientation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -655,6 +681,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D11ABB891F02ADA900B2755A /* PBXTargetDependency */,
 			);
 			name = SriTechApp;
 			productName = "Hello World";
@@ -712,7 +739,8 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = MS76244S68;
+						DevelopmentTeam = K96DU9VJ5N;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -768,6 +796,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = D11ABB601F02AC4900B2755A /* Products */;
+					ProjectRef = D11ABB5F1F02AC4900B2755A /* RCTOrientation.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1033,6 +1065,13 @@
 			remoteRef = 90F2161B1EFB4071003108B9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D11ABB701F02AC4B00B2755A /* libRCTOrientation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTOrientation.a;
+			remoteRef = D11ABB6F1F02AC4B00B2755A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1158,6 +1197,11 @@
 			target = 2D02E47A1E0B4A5D006451C7 /* SriTechApp-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
+		D11ABB891F02ADA900B2755A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RCTOrientation;
+			targetProxy = D11ABB881F02ADA900B2755A /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -1205,9 +1249,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = MS76244S68;
+				DEVELOPMENT_TEAM = K96DU9VJ5N;
 				INFOPLIST_FILE = SriTechApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1227,8 +1272,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MS76244S68;
+				DEVELOPMENT_TEAM = K96DU9VJ5N;
 				INFOPLIST_FILE = SriTechApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

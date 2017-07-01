@@ -11,7 +11,7 @@ const slideWidth = 200;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const itemWidth = slideWidth + horizontalMargin * 2;
-const itemHeight = SCREEN_HEIGHT * 0.8;
+const itemHeight = SCREEN_HEIGHT * 0.7;
 
 class Info extends Component {
   constructor(){
@@ -53,17 +53,6 @@ class Info extends Component {
 
             <Card style={slide}>
               <CardSection>
-                <Image style={img} source={require('../../assets/images/infograph.jpg')} >
-                  <TouchableOpacity activeOpacity={1} style={imgCover} onPress={ () => this.props.viewImage('infograph')}>
-                    <Text style={imgCoverTitle}> Mobile Impact in Sri Lanka </Text>
-                    <Text style={imgCoverSubtitle}> Learn about the power within your phone! </Text>
-                  </TouchableOpacity>
-                </Image>
-              </CardSection>
-            </Card>
-
-            <Card style={slide}>
-              <CardSection>
                 <Image style={img} source={require('../../assets/images/infograph4.jpg')} >
                   <TouchableOpacity activeOpacity={1} style={imgCover} onPress={ () => this.props.viewImage('infograph4') }>
                     <Text style={imgCoverTitle}> Foot Health </Text>
@@ -84,7 +73,8 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FAFAFA'
+    backgroundColor: '#FAFAFA',
+    marginTop:70
   },
   slide: {
     width: itemWidth,

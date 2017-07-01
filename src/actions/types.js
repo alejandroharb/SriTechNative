@@ -24,3 +24,5 @@ export const MAP_NAV_PRESSED = 'map_nav_pressed';
 export const PROFILE_NAV_PRESSED = 'profile_nav_pressed';
 //infograph actions
 export const INFOGRAPH_CHANGED = 'infograph_changed';
+//profile
+export const UPLOAD_IMAGE_SUCCESS = 'upload_image_success';

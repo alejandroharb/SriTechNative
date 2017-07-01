@@ -74,7 +74,8 @@ const styles = {
     flex:1,
     flexDirection:'column',
     alignItems: 'stretch',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    marginTop: '20%'
   },
   wallpaper: {
     flex:8,

@@ -56,68 +56,77 @@ class SignUp extends Component {
     }
 
     return(
-      <CardSection>
-        <Button onPress={this.submitNewUser.bind(this)}>
+
+        <Button
+          onPress={this.submitNewUser.bind(this)}
+          customButtonStyle={styles.button}
+          customTextStyle={styles.buttonText}
+        >
           Submit
         </Button>
-      </CardSection>
+
     )
   }
 
   render(){
-    const { section, subSectionRow, sliderContainer, contentHeaderText, labelStyle, valueLabel, headerText, errorTextStyle } = styles;
+    const { mainContainer, section, contentContainer, customCardSecStyle,  subSectionRow, contentHeaderText, inputTextStyle, labelStyle, valueLabel, headerText, errorTextStyle } = styles;
     return(
-      <ScrollView>
+      <ScrollView contentContainerStyle={mainContainer}>
 
-        <Card>
-
-          <CardSection>
+          <CardSection style={customCardSecStyle}>
             <Input
-              label="email"
+              label="Email"
               placeholder="email@gmail.com"
               onChangeText={this.onEmailChange.bind(this)}
               value={this.props.email}
+              customTextStyle={inputTextStyle}
             />
           </CardSection>
 
-          <CardSection>
+          <CardSection style={customCardSecStyle}>
             <Input
-              label="password"
+              label="Password"
               placeholder="mypassword"
               onChangeText={this.onPasswordChange.bind(this)}
               value={this.props.password}
+              customTextStyle={inputTextStyle}
             />
           </CardSection>
 
-          <CardSection>
+          <CardSection style={customCardSecStyle}>
             <Input
-              label="Name"
-              placeholder="John"
+              label="Full Name"
+              placeholder="John Doe"
               onChangeText={this.onNameChange.bind(this)}
               value={this.props.name}
+              customTextStyle={inputTextStyle}
             />
           </CardSection>
 
           <View style={section}>
-            <View style={[contentHeaderText, {marginBottom: 10}]}>
+            <View style={contentHeaderText}>
               <Text style={labelStyle}>Birthdate</Text>
             </View>
-            <DatePickerIOS
-              date={this.props.birthdate}
-              mode="date"
-              onDateChange={this.onDateChange.bind(this)}
-            />
+            <View style={contentContainer}>
+              <DatePickerIOS
+                date={this.props.birthdate}
+                mode="date"
+                onDateChange={this.onDateChange.bind(this)}
+              />
+            </View>
           </View>
 
           <View style={section}>
-            <View style={{marginBottom: 10}}>
+            <View style={{marginBottom: 15}}>
               <Text style={labelStyle}>Gender</Text>
             </View>
-            <SegmentedControlIOS
-              values={['Male', 'Female']}
-              selectedIndex={this.props.gender}
-              onChange={ (event) => this.onGenderChange(event.nativeEvent.selectedSegmentIndex) }
-            />
+            <View style={contentContainer}>
+              <SegmentedControlIOS
+                values={['Male', 'Female']}
+                selectedIndex={this.props.gender}
+                onChange={ (event) => this.onGenderChange(event.nativeEvent.selectedSegmentIndex) }
+              />
+            </View>
           </View>
 
           <View style={section}>
@@ -129,7 +138,7 @@ class SignUp extends Component {
                 <Text style={valueLabel}>{this.props.weight} kg</Text>
               </View>
             </View>
-            <View style={sliderContainer}>
+            <View style={contentContainer}>
               <Slider
                 minimumValue={30}
                 maximumValue={100}
@@ -149,7 +158,7 @@ class SignUp extends Component {
                 <Text style={valueLabel}>{this.props.height} cm</Text>
               </View>
             </View>
-            <View style={sliderContainer}>
+            <View style={contentContainer}>
               <Slider
                 minimumValue={0}
                 maximumValue={300}
@@ -166,13 +175,17 @@ class SignUp extends Component {
 
           {this.renderButton()}
 
-        </Card>
+
       </ScrollView>
     )
   }
 }
 
 const styles = {
+  mainContainer: {
+    marginTop: 60,
+    paddingBottom: 60
+  },
   section: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -180,6 +193,11 @@ const styles = {
     borderBottomWidth: 1,
     borderColor: '#ddd',
     padding: 5
+  },
+  customCardSecStyle:{
+    marginTop: 20,
+    paddingBottom: 20,
+    alignItems: 'center'
   },
   subSectionRow: {
     flex: 1,
@@ -193,15 +211,42 @@ const styles = {
   },
   labelStyle:{
     fontSize: 18,
-    paddingLeft: 20
+    paddingLeft: 10,
+    paddingBottom: 15
   },
   sliderContainer: {
-    marginTop: 20
+    marginTop: 20,
+    paddingLeft: 70
   },
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
-    color: 'red'
+    color: 'red',
+    paddingTop: 10
+  },
+  contentContainer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginBottom: 15
+  },
+  button: {
+    backgroundColor: '#4285f4',
+    elevation:3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    marginBottom: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop:10
+  },
+  buttonText: {
+    color: '#FAFAFA'
+  },
+  inputTextStyle: {
+    fontSize: 18,
+    paddingLeft: 10
   }
 }
 

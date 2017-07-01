@@ -16,6 +16,7 @@
 		F1EB08BB1AFD0E6A008F8F2B /* NSArray+Map.m in Sources */ = {isa = PBXBuildFile; fileRef = F1EB08BA1AFD0E6A008F8F2B /* NSArray+Map.m */; };
 		0119E8946AF140C6AAD59500 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0A3256DC7B4C31B3745128 /* libRCTCamera.a */; };
 		AAFF58EC59F24881A3FEC6BE /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6DDBCC7C4A4C3D9BDCE516 /* libRNVectorIcons.a */; };
+		4DC3777E7C36497B94D63776 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF11D9EAF80449D1BEFD8716 /* libRCTOrientation.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +56,8 @@
 		82FE9E4495EE4F59A84699EE /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		41FF601A18754E4B94CCAA09 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		ED6DDBCC7C4A4C3D9BDCE516 /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		7D9E35D6CB8347C890260B5B /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; name = "RCTOrientation.xcodeproj"; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		FF11D9EAF80449D1BEFD8716 /* libRCTOrientation.a */ = {isa = PBXFileReference; name = "libRCTOrientation.a"; path = "libRCTOrientation.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,7 @@
 			files = (
 				0119E8946AF140C6AAD59500 /* libRCTCamera.a in Frameworks */,
 				AAFF58EC59F24881A3FEC6BE /* libRNVectorIcons.a in Frameworks */,
+				4DC3777E7C36497B94D63776 /* libRCTOrientation.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +112,7 @@
 				D4CCD3613AC3467E9F74659D /* RCTCamera.xcodeproj */,
 				82FE9E4495EE4F59A84699EE /* RNFS.xcodeproj */,
 				41FF601A18754E4B94CCAA09 /* RNVectorIcons.xcodeproj */,
+				7D9E35D6CB8347C890260B5B /* RCTOrientation.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/RNFS\"",
 					"\"$(SRCROOT)/RNFS\"",
+					"\"$(SRCROOT)/RNFS\"",
 				);
 			};
 			name = Debug;
@@ -250,6 +256,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/RNFS\"",
 					"\"$(SRCROOT)/RNFS\"",
 					"\"$(SRCROOT)/RNFS\"",
 				);
@@ -343,6 +350,7 @@
 					"$(SRCROOT)/../../React/**",
 					"$(SRCROOT)/../react-native/React/**",
 					"$(SRCROOT)/node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -359,6 +367,7 @@
 					"$(SRCROOT)/../../React/**",
 					"$(SRCROOT)/../react-native/React/**",
 					"$(SRCROOT)/node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

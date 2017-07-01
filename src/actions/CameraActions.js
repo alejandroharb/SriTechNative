@@ -41,13 +41,16 @@ export const imageSubmit = (imgPath) => {
           resultClass[0].score = parseFloat(resultClass[0].score * 100).toFixed(1);
           //add recommendation property
           if (resultClass[0].class == "Level_0"){
-            resultClass[0].recommendation = recommendations[0]
+            resultClass[0].class = "Grade 0";
+            resultClass[0].recommendation = recommendations[0];
           }
           if (resultClass[0].class == "Level_1"){
-            resultClass[0].recommendation = recommendations[1]
+            resultClass[0].class = "Grade 1";
+            resultClass[0].recommendation = recommendations[1];
           }
           if (resultClass[0].class == "Level_2"){
-            resultClass[0].recommendation = recommendations[2]
+            resultClass[0].class = "Grade 2";
+            resultClass[0].recommendation = recommendations[2];
           }
 
 

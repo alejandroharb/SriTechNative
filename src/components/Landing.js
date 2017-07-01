@@ -1,43 +1,52 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection } from './common';
 import Login from './auth/Login';
 
 class Landing extends Component {
   render(){
+    const { mainContainer, imgContainer } = styles;
     return(
+      <ScrollView>
+        <View style={ mainContainer }>
 
-      <View style={{paddingTop: 30}}>
-        <Image source={require('../assets/images/logo.png')} style={styles.logo} />
-        <Card>
+          <Image source={require('../assets/images/padaLogo.png')} style={styles.logo} />
           <Login />
 
-          <Text style={styles.separatorTxt}> OR </Text>
 
-          <CardSection>
-            <Button onPress={() => Actions.signup()} >
-              Sign Up
-            </Button>
-          </CardSection>
-        </Card>
-      </View>
+          <TouchableOpacity onPress={() => Actions.signup()} >
+            <Text style={styles.signup}>Dont have an account? Sign Up!</Text>
+          </TouchableOpacity>
+
+        </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = {
+  mainContainer: {
+    paddingRight: 30,
+    paddingLeft: 30,
+    marginTop:30,
+    marginBottom: 60
+  },
   logo:{
     alignSelf: 'center',
-    width: 80,
-    height: 80,
-    margin: 30
+    width: 250,
+    height: 160,
+    marginTop:40,
+    marginBottom: 40
   },
   separatorTxt:{
     alignSelf: 'center',
     fontSize: 24,
     margin: 15,
     color: '#4285f4'
+  },
+  signup: {
+    alignSelf: 'center'
   }
 }
 

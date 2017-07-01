@@ -51,7 +51,7 @@ class Home extends Component {
 
       <View style={{flex: 1, flexDirection: 'column',}}>
         <View style={{marginLeft: 10, marginRight: 40, height: 136, backgroundColor: 'lightgreen'}}>
-			<TouchableOpacity>
+			<TouchableOpacity onPress={ () => Actions.education() }>
 				<Image style={{width: undefined}} source={videos}>
 					<View style={{flex:1, justifyContent: 'flex-end', flexDirection: 'column'}}>
 						<Text style={textSection}>
