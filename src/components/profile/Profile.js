@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ImagePickerIOS, ScrollView } from 'react-native';
+import { View, Text, Image, ImagePickerIOS, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { RowText } from '../common/RowText';
 import moment from 'moment';
+import { uploadImage } from '../../actions/AuthActions';
 
 class Profile extends Component {
   constructor(){
@@ -24,13 +25,39 @@ class Profile extends Component {
     this.setState({ birthdate: birth_date, age: age, gender: gender });
   }
 
+  chooseNewImage() {
+    ImagePickerIOS.openSelectDialog(
+      {}, imageUri => {
+        console.log(imageUri);
+        // Redux update state
+        this.props.uploadImage(imageUri);
+      }, cancel => { console.log(cancel)});
+  }
+
+  renderImage() {
+    if(this.props.image.profileImage){
+      return(
+        <TouchableOpacity onPress={ this.chooseNewImage.bind(this)} >
+          <View style={styles.imgContainer}>
+            <Image source={{uri: this.props.image.profileImage}} style={styles.profileImage}/>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+    return(
+      <TouchableOpacity onPress={ this.chooseNewImage.bind(this) }>
+        <Icon name="person" size={90} color="#dcdcdc" style={styles.image}/>
+      </TouchableOpacity>
+    );
+  }
+
   render(){
-    const { mainContainer, contentContainer, topContainer, image, subSectionRow, labelStyle, valueLabel, userName } = styles;
+    const { mainContainer, contentContainer, topContainer, subSectionRow, labelStyle, valueLabel, userName } = styles;
 
     return(
       <View style={mainContainer}>
         <View style={topContainer}>
-          <Icon name="person" size={90} color="#dcdcdc" style={image}/>
+          { this.renderImage() }
           <Text style={userName}>{this.props.name}</Text>
         </View>
 
@@ -97,7 +124,9 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#4285f4'
+    backgroundColor: '#4285f4',
+    paddingTop:15,
+    paddingBottom: 15
   },
   contentContainer:{
     flex: 3,
@@ -110,6 +139,20 @@ const styles = {
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.4,
     shadowRadius: 5
+  },
+  profileImage: {
+    width: 120,
+    height: 120,
+    borderRadius:60
+  },
+  imgContainer: {
+    marginTop:15,
+    elevation:10,
+    borderRadius: 60,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.6,
+    shadowRadius: 8
   },
   subSectionRow: {
     flex: 1,
@@ -138,8 +181,8 @@ const styles = {
 }
 
 const mapStateToProps = (state) => {
-  const { name, birthdate, gender, weight, height } = state.navBar.user;
-  return { name, birthdate, gender, weight, height };
+  const { name, birthdate, gender, weight, height, image } = state.auth.user;
+  return { name, birthdate, gender, weight, height, image };
 }
 
-export default connect(mapStateToProps, {})(Profile);
+export default connect(mapStateToProps, { uploadImage })(Profile);

@@ -10,7 +10,8 @@ import {
   WEIGHT_CHANGED,
   HEIGHT_CHANGED,
   CREATE_USER_SUCCESS,
-  CREATE_USER_FAIL
+  CREATE_USER_FAIL,
+  UPLOAD_IMAGE_SUCCESS
 } from './types';
 
 import firebase from 'firebase';
@@ -36,7 +37,14 @@ export const loginUser = ({ email, password }) => {
     dispatch({type: LOGIN_USER});
 
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(user => loginUserSuccess(dispatch, user))
+      .then(user => {
+        firebase.database().ref(`users/${user.uid}/records`).once('value')
+          .then( (snapshot) => {
+              console.log(snapshot.val())
+              loginUserSuccess(dispatch, snapshot.val())
+           })
+
+      })
       .catch( () => loginUserFail(dispatch));
   }
 };
@@ -45,10 +53,10 @@ const loginUserFail = (dispatch) => {
   dispatch({type: LOGIN_USER_FAIL});
 };
 
-const loginUserSuccess = (dispatch, user) => {
+const loginUserSuccess = (dispatch, userData) => {
   dispatch({
     type: LOGIN_USER_SUCCESS,
-    payload: user
+    payload: userData
   })
 
   Actions.root();
@@ -96,7 +104,7 @@ export const userCreate = ({email, password, name, birthdate, gender, weight, he
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then( user => {
         firebase.database().ref(`users/${user.uid}/records/`)
-          .set({ name, birthdate: birth_date, gender, weight, height })
+          .set({ name, birthdate: birth_date, gender, weight, height, image: { profileImage: '' } })
           .then( () => {
             console.log(user);
             createUserSuccess(dispatch, user)
@@ -112,9 +120,30 @@ export const createUserSuccess = (dispatch, user) => {
     payload: user
   })
 
-  Actions.main();
+  Actions.root();
 };
 
 const createUserFail = (dispatch) => {
   dispatch({type: CREATE_USER_FAIL});
+};
+
+/* ----Uploading New Image for User Profile ---- */
+
+export const uploadImage = (path) => {
+  const { currentUser } = firebase.auth();
+  return (dispatch) => {
+    firebase.database().ref(`users/${currentUser.uid}/records/image`)
+      .set({ profileImage: path })
+      .then( () => {
+        firebase.database().ref(`users/${currentUser.uid}/records`).once('value')
+          .then( (snapshot) => {
+              dispatch({ type: UPLOAD_IMAGE_SUCCESS, payload: snapshot.val()})
+           })
+
+      })
+      .catch( error => {
+        console.log(error) ;
+        //dispatch an error reducer
+      });
+  }
 };

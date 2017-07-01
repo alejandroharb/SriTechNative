@@ -13,12 +13,10 @@ import Landing from './components/Landing';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { navigateToProfile } from './actions/NavigationActions';
+import { navigateToProfile } from './actions/ProfileActions';
 import { connect } from 'react-redux';
 import CommunityDiary from './components/diaries/Diary';
-
-// Simple component to render something in place of icon
-
+import Education from './components/education/Education';
 
 class RouterComponent extends Component {
   constructor(){
@@ -37,7 +35,7 @@ class RouterComponent extends Component {
         );
       case "selfcare":
         return (
-          <Icon name="healing" size={30} color={selected ? '#3d88ec' :'#dcdcdc'} />
+          <Icon name="supervisor-account" size={30} color={selected ? '#3d88ec' :'#dcdcdc'} />
         );
       case "camera":
         return (
@@ -48,7 +46,7 @@ class RouterComponent extends Component {
           <Icon name="map" size={30} color={selected ? '#3d88ec' :'#dcdcdc'} />
         );
       case "profile":
-        if( selected ) { this.pressProfile() }
+        // if( selected ) { this.pressProfile() }
         return (
           <Icon name="person" size={30} color={selected ? '#3d88ec' :'#dcdcdc'} />
         );
@@ -64,10 +62,10 @@ class RouterComponent extends Component {
     return(
       <Router sceneStyle={{ paddingTop: 0}} navigationBarStyle={styles.navBarStyle} titleStyle={styles.navBarTitle}>
 
-        <Scene key="authentication" initial hideNavBar>
-          <Scene key="landing" component={Landing} initial/>
-          <Scene key="login" component={Login} />
-          <Scene key="signup" component={SignUp} title="Create Account" />
+        <Scene key="authentication" initial >
+          <Scene key="landing" component={Landing} initial hideNavBar/>
+          <Scene key="login" component={Login} hideNavBar/>
+          <Scene key="signup" component={SignUp} title="Create Account" hideNavBar={false}/>
         </Scene>
 
         <Scene key="root">
@@ -79,27 +77,30 @@ class RouterComponent extends Component {
               <Scene key="menu" component={Home} title="Home" initial />
               <Scene key="infographs" >
                 <Scene key="info" component={Info} title="Info" initial/>
-                <Scene key="infoImage" component={InfoImage} title="Info"/>
+                <Scene key="infoImage" component={InfoImage} title="Info" hideTabBar/>
               </Scene>
               <Scene key="diaries" component={CommunityDiary} title="Diaries"/>
+              <Scene key="education" component={Education} title="Education"/>
             </Scene>
+
             {/* Tab and it's scenes */}
-            <Scene key="healing" icon={this.TabIcon} title="selfcare" >
+            {/*<Scene key="healing" icon={this.TabIcon} title="selfcare" >
               <Scene key="healingContent" component={Healing} title="Healing" />
-            </Scene>
+            </Scene>*/}
+
             {/* Tab and it's scenes */}
             <Scene key="visualization" icon={this.TabIcon} title="camera" >
                 <Scene key="visualizationMenu" component={CamMenu} title="Camera" initial />
-                <Scene key="camera" component={Camera} title="Foot Analysis" hideNavBar/>
-                <Scene key="gallery" component={Images} title="Gallery" sceneStyle={{paddingTop: 15}} hideNavBar/>
+                <Scene key="camera" component={Camera} title="Foot Analysis" hideNavBar hideTabBar/>
+                <Scene key="gallery" component={Images} title="Gallery" sceneStyle={{paddingTop: 15}} hideNavBar hideTabBar={false}/>
                 <Scene key="results" component={AIResults} title="Results" hideNavBar={false}/>
             </Scene>
             {/* Tab and it's scenes */}
             <Scene key="map" icon={this.TabIcon} title="map">
             </Scene>
             {/* Tab and it's scenes */}
-            <Scene key="profile" icon={this.TabIcon} title="profile" hideNavBar>
-              <Scene key="profilePage" component={Profile} />
+            <Scene key="profilePage" icon={this.TabIcon} title="profile" hideNavBar>
+              <Scene key="userProfile" component={Profile} />
             </Scene>
 
           </Scene>

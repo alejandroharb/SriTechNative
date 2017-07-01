@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { TextInput, View, Text } from 'react-native';
+import { TextInput, View, Text, Keyboard } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Input extends Component {
   render() {
     const { inputStyle, labelStyle, containerStyle } = styles;
     return(
       <View style={containerStyle}>
-        <Text style={labelStyle}>{this.props.label}</Text>
+        <Icon size={20} name={this.props.icon} color="#dcdcdc"/>
+        <Text style={[labelStyle, this.props.customTextStyle]}>{this.props.label}</Text>
         <TextInput
           secureTextEntry={this.props.secureTextEntry}
           placeholder={this.props.placeholder}
           autoCorrect={false}
-          style={inputStyle}
+          style={[inputStyle, this.props.customInputStyle]}
           value={this.props.value}
           onChangeText={this.props.onChangeText}
+          onEndEditing={ () => Keyboard.dismiss()}
         />
       </View>
     )
@@ -30,12 +33,12 @@ const styles = {
     flex:2
   },
   labelStyle: {
-    fontSize:18,
-    paddingLeft:20,
+    fontSize:15,
+    paddingLeft:5,
     flex:1
   },
   containerStyle: {
-    height:40,
+    height:30,
     flex:1,
     flexDirection:'row',
     alignItems:'center'

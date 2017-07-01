@@ -5,14 +5,14 @@ import { Card, CardSection } from '../../common';
 const Suggestions = ({title, suggestion }) => {
   const { container, suggestionsTitle, suggestionTextStyle } = styles;
   return(
-    <Card>
-      <CardSection style={container}>
+
+      <View style={container}>
         <View>
           <Text style={suggestionsTitle}> { title } </Text>
         </View>
         <Text style={ suggestionTextStyle }>{ suggestion }</Text>
-      </CardSection>
-    </Card>
+      </View>
+
   )
 }
 

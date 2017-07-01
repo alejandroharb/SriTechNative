@@ -10,13 +10,14 @@ import {
   WEIGHT_CHANGED,
   HEIGHT_CHANGED,
   CREATE_USER_SUCCESS,
-  CREATE_USER_FAIL
+  CREATE_USER_FAIL,
+  UPLOAD_IMAGE_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
   email: '',
   password: '',
-  user: null,
+  user: {},
   loading: false,
   name: '',
   birthdate: new Date(),
@@ -51,6 +52,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state,  user: action.payload };
     case CREATE_USER_FAIL:
       return { ...state, error: 'Account Creation Failed.', loading: false };
+    case UPLOAD_IMAGE_SUCCESS:
+      return { ...state, user: action.payload };
     default:
       return state;
   }

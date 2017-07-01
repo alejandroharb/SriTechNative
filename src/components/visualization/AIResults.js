@@ -20,10 +20,12 @@ class AIResults extends Component{
         <ScrollView contentContainerStyle={contentsContainer}>
           <View style={imageResultsSummaryContainer}>
             <Image style={{ width: 100, height: 100}} source={ {uri: image} }/>
-            <View>
+            <View style={styles.titleContainer}>
               <Text style={resultsTitle}>{ watsonResults.matchResults ? watsonResults.matchResults[0].class : "No Detection"  }</Text>
             </View>
           </View>
+
+          <View style={styles.hr} />
 
           <View>
             <Suggestions
@@ -32,14 +34,6 @@ class AIResults extends Component{
             />
           </View>
 
-
-          <CardSection style={ buttonContainer }>
-              <Button
-              customButtonStyle={ buttonStyle }
-              >
-                Community Health Worker
-              </Button>
-          </CardSection>
         </ScrollView>
 
       </View>
@@ -67,9 +61,8 @@ const styles = {
   resultsTitle: {
     textAlign: 'center',
     fontWeight: '800',
-    fontSize: 20,
-    lineHeight: 25,
-    marginTop: 10
+    fontSize: 25,
+    paddingRight:10
   },
   resultsSubtitle:{
     fontSize: 18,
@@ -85,6 +78,17 @@ const styles = {
   buttonStyle: {
     height: 60,
     justifyContent: 'center'
+  },
+  titleContainer: {
+    justifyContent:'center',
+    alignItems: 'center'
+  },
+  hr: {
+    alignSelf: 'center',
+    marginTop:20,
+    borderBottomColor: '#ddd',
+    width: 200,
+    borderBottomWidth: 1,
   }
 }
 

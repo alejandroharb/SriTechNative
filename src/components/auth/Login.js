@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Input, Card, CardSection, Button, Spinner } from '../common';
 import { emailChanged, passwordChanged, loginUser } from '../../actions/AuthActions';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class LoginForm extends Component {
 
@@ -20,7 +21,11 @@ class LoginForm extends Component {
     }
 
     return(
-      <Button onPress={this.onButtonPress.bind(this)}>
+      <Button
+        onPress={this.onButtonPress.bind(this)}
+        customButtonStyle={styles.button}
+        customTextStyle={styles.buttonText}
+        >
         Login
       </Button>
     )
@@ -33,34 +38,38 @@ class LoginForm extends Component {
 
   render(){
     return(
-
       <View>
-        <CardSection>
+
+      <Card style={styles.inputContainer}>
+        <CardSection style={styles.cardSection}>
           <Input
             label="email"
-            placeholder="email@gmail.com"
+            icon="email"
             onChangeText={this.onEmailChange.bind(this)}
             value={this.props.email}
+            customInputStyle={styles.input}
           />
         </CardSection>
 
-        <CardSection>
+        <CardSection style={styles.cardSection}>
           <Input
             secureTextEntry
             label="password"
-            placeholder="mypassword"
+            icon="lock"
             onChangeText={this.onPasswordChange.bind(this)}
             value={this.props.password}
+            customInputStyle={styles.input}
           />
         </CardSection>
+      </Card>
 
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
+      <Text style={styles.errorTextStyle}>
+        {this.props.error}
+      </Text>
 
-        <CardSection style={{borderBottomWidth:0}}>
-          {this.renderButton()}
-        </CardSection>
+      <CardSection style={{borderBottomWidth:0}}>
+        {this.renderButton()}
+      </CardSection>
 
       </View>
     )
@@ -72,6 +81,29 @@ const styles = {
     fontSize: 20,
     alignSelf: 'center',
     color: 'red'
+  },
+  input:{
+    height: 30
+  },
+  cardSection: {
+    paddingLeft: 5
+  },
+  button: {
+    backgroundColor: '#4285f4',
+    elevation:3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    marginBottom: 10,
+    marginLeft: 0,
+    marginRight: 0
+  },
+  buttonText: {
+    color: '#FAFAFA'
+  },
+  inputContainer: {
+
   }
 }
 
